@@ -1,0 +1,9 @@
+deepface>=0.0.93
+opencv-python>=4.8.0
+retina-face>=0.0.14
+tf-keras>=2.15.0
+tensorflow>=2.15.0
+python-dotenv>=1.0.0
+numpy>=1.23.0
+ultralytics>=8.0.0
+Pillow>=9.5.0
