@@ -5,12 +5,11 @@ This script opens the camera feed and detects if ANY human face appears.
 When a face is detected, it sends an instant email notification via Gmail.
 
 Run command:
-    python live_face_detection.py
+    python SentinelVision.py
 
 Press 'q' to exit the camera window.
 """
 
-import os
 import smtplib
 import time
 from email.mime.multipart import MIMEMultipart
