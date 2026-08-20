@@ -17,9 +17,21 @@
 
 ## 📖 Overview | نظرة عامة
 
-**SentinelVision** is a lightweight, real-time computer vision security system designed to monitor live camera streams (Webcam / DroidCam), detect human presence and faces using deep learning backends (RetinaFace / OpenCV), and dispatch instant email alerts via Gmail SMTP.
+**SentinelVision** is a lightweight, real-time computer vision security system designed to monitor live camera streams (Webcam), detect human presence and faces using deep learning backends (RetinaFace / OpenCV), and dispatch instant email alerts via Gmail SMTP.
 
-نظام مراقبة وتنبيه أمني ذكي يعتمد على الرؤية الحاسوبية والذكاء الاصطناعي لرصد الوجوه وحركة الأشخاص في الوقت الفعلي عبر الكاميرا وإرسال إشعارات فورية على الجيميل.
+نظام مراقبة وتنبيه أمني ذكي يعتمد على الرؤية الحاسوبية والذكاء الاصطناعي لرصد الوجوه وحركة الأشخاص في الوقت الفعلي عبر الكاميرا وإرسال إشعارات وتنبيهات أمنية فورية على الجيميل.
+
+---
+
+## 📦 Libraries & Dependencies | المكتبات المستخدمة
+
+| Library | Type | Purpose |
+|---|---|---|
+| **`opencv-python`** (`cv2`) | External (`pip install`) | التقاط وتحليل فيديو الكاميرا في الوقت الفعلي |
+| **`deepface`** | External (`pip install`) | رصد واكتشاف الوجوه بدقة عبر موديل RetinaFace |
+| **`smtplib`** | Built-in (مدمجة مع بايثون) | الاتصال بسيرفر Gmail وإرسال الإشعارات عبر بروتوكول SMTP |
+| **`time`** | Built-in (مدمجة مع بايثون) | إدارة الفواصل الزمنية وفترات التهدئة (Cooldown) لمنع تكرار الرسائل |
+| **`email`** | Built-in (مدمجة مع بايثون) | تنسيق وبناء رسائل البريد الإلكتروني (MIMEMultipart) |
 
 ---
 
@@ -28,7 +40,7 @@
 - 👁️ **Live Face & Presence Detection**: Automatically detects any human face appearing in the camera feed.
 - 📧 **Instant Gmail Alerts**: Dispatches security notification emails with timestamp and details.
 - ⏱️ **Smart Alert Cooldown**: Configurable cooldown threshold (default 5 mins) to avoid spam.
-- 📹 **Flexible Camera Feeds**: Works with built-in webcams, external USB cameras, and mobile streams (DroidCam).
+- 📹 **Flexible Camera Feeds**: Works with built-in webcams and external USB cameras.
 - 🚀 **Zero Dataset Setup**: Ready to run out of the box without requiring pre-trained reference databases.
 
 ---
@@ -63,7 +75,7 @@ pip install -r requirements.txt
 ```bash
 python SentinelVision.py
 ```
-> اضغط **`q`** لإغلاق نافذة الكاميرا بأمان.
+> اضغط **`q`** للخروج وإغلاق نافذة الكاميرا بأمان.
 
 ---
 
