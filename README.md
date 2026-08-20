@@ -1,4 +1,4 @@
-# 🔍 Real-Time Face Recognition & Security Alert System
+# 🛡️ SentinelVision
 
 <div align="center">
 
@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
 <p align="center">
-  <b>A real-time AI computer vision system framework for face recognition and automated instant security notifications.</b>
+  <b>SentinelVision: Real-time AI Face & Presence Detection System with Instant Automated Gmail Security Notifications.</b>
 </p>
 
 </div>
@@ -17,70 +17,70 @@
 
 ## 📖 Overview | نظرة عامة
 
-**Face Recognition & Security Alert System** is an intelligent computer vision solution designed for real-time monitoring and automated email alert dispatch using DeepFace and OpenCV.
+**SentinelVision** is a lightweight, real-time computer vision security system designed to monitor live camera streams (Webcam / DroidCam), detect human presence and faces using deep learning backends (RetinaFace / OpenCV), and dispatch instant email alerts via Gmail SMTP.
 
-نظام مراقبة ذكي يعتمد على تقنيات الرؤية الحاسوبية والذكاء الاصطناعي للتعرف على الوجوه في الوقت الفعلي وإرسال إشعارات وتنبيهات أمنية فورية على البريد الإلكتروني (Gmail).
+نظام مراقبة وتنبيه أمني ذكي يعتمد على الرؤية الحاسوبية والذكاء الاصطناعي لرصد الوجوه وحركة الأشخاص في الوقت الفعلي عبر الكاميرا وإرسال إشعارات فورية على الجيميل.
 
 ---
 
-## 📁 Repository Structure | هيكل المشروع
+## ✨ Key Features | المميزات
+
+- 👁️ **Live Face & Presence Detection**: Automatically detects any human face appearing in the camera feed.
+- 📧 **Instant Gmail Alerts**: Dispatches security notification emails with timestamp and details.
+- ⏱️ **Smart Alert Cooldown**: Configurable cooldown threshold (default 5 mins) to avoid spam.
+- 📹 **Flexible Camera Feeds**: Works with built-in webcams, external USB cameras, and mobile streams (DroidCam).
+- 🚀 **Zero Dataset Setup**: Ready to run out of the box without requiring pre-trained reference databases.
+
+---
+
+## 📁 Repository Structure | هيكل المستودع
 
 ```
-├── images/
-│   └── data/                 # Reference images directory
-├── requirements.txt          # Python dependencies
-├── .env.example              # Environment variables template
+├── SentinelVision.py         # 🚀 Main SentinelVision detection & alert script
+├── requirements.txt          # Dependencies (opencv-python, deepface)
+├── .env.example              # Configuration template
 ├── .gitignore                # Git ignore rules
+├── LICENSE                   # MIT License
 └── README.md                 # Project documentation
 ```
 
 ---
 
-## 🚀 Quick Start Guide | دليل البدء السريع
+## 🚀 Quick Start | طريقة التشغيل
 
-### 1. Prerequisites | المتطلبات الأساسية
-- **Python 3.10 or 3.11** installed.
-- A functional camera (Webcam or DroidCam app connected to the PC).
-
-### 2. Clone the Repository | تحميل المستودع
+### 1. Clone & Setup | تحميل المستودع
 ```bash
-git clone https://github.com/omarelsawaf/Face-Recognition-Security-System.git
-cd Face-Recognition-Security-System
+git clone https://github.com/omarelsawaf/SentinelVision.git
+cd SentinelVision
 ```
 
-### 3. Install Dependencies | تثبيت المكتبات المطلوبة
+### 2. Install Dependencies | تثبيت المكتبات
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## ⚙️ Configuration (.env) | إعداد ملف التكوين
-
-1. Copy `.env.example` to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-
-2. Configure your Gmail credentials and camera settings inside `.env`.
+### 3. Run SentinelVision | تشغيل البرنامج
+```bash
+python SentinelVision.py
+```
+> اضغط **`q`** لإغلاق نافذة الكاميرا بأمان.
 
 ---
 
-## 🛡️ Security & Privacy
-
-- Sensitive data such as Gmail App Passwords and emails are stored in `.env` and excluded from git tracking via `.gitignore`.
-- Reference photos are stored locally on your machine and are not sent to any cloud server.
+## ⚙️ Configuration | إعداد البريد الإلكتروني
+افتح ملف `SentinelVision.py` وقم بتعيين بيانات الجيميل:
+- `SENDER_EMAIL`: بريدك الإلكتروني الذي سيرسل الإشعار.
+- `APP_PASSWORD`: كلمة مرور التطبيقات المكونة من 16 حرفاً (Gmail App Password).
+- `RECEIVER_EMAIL`: البريد الإلكتروني الذي سيستقبل التنبيه.
 
 ---
 
-## 👤 Author & Maintainer
+## 👤 Author
 
 - **Developer**: [Omar Elsawaf](https://github.com/omarelsawaf)
-- **Email**: omarelsawaf2022@gmail.com
 - **GitHub**: [@omarelsawaf](https://github.com/omarelsawaf)
 
 ---
 
 ## 📄 License
-
-This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE).
