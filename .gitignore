@@ -24,8 +24,6 @@ __pycache__/
 *.swp
 *.swo
 
-# Temporary runtime files
-temp_frame.jpg
 
 # OS generated files
 Thumbs.db
