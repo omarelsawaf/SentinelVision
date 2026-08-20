@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
 <p align="center">
-  <b>A production-ready, real-time AI computer vision system for face recognition, presence detection, and automated instant Gmail security notifications.</b>
+  <b>A real-time AI computer vision system framework for face recognition and automated instant security notifications.</b>
 </p>
 
 </div>
@@ -17,66 +17,9 @@
 
 ## 📖 Overview | نظرة عامة
 
-**Face Recognition & Security Alert System** is an intelligent computer vision solution engineered for real-time monitoring and automated alert dispatch. Utilizing state-of-the-art deep learning models (`FaceNet` and `RetinaFace`) through the `DeepFace` framework and `OpenCV`, the system matches incoming camera frames against authorized face embeddings and immediately triggers instant email alerts when authorized or unauthorized personnel are identified.
+**Face Recognition & Security Alert System** is an intelligent computer vision solution designed for real-time monitoring and automated email alert dispatch using DeepFace and OpenCV.
 
-نظام مراقبة ذكي متكامل يعتمد على تقنيات الرؤية الحاسوبية والذكاء الاصطناعي للتعرف على الوجوه في الوقت الفعلي عبر الكاميرا (أو DroidCam) وإرسال إشعارات وتنبيهات أمنية فورية على البريد الإلكتروني (Gmail) عند رصد أو مطابقة الوجوه المحددة.
-
----
-
-## ✨ Key Features | المميزات الرئيسية
-
-- 🎯 **State-of-the-Art Recognition**: Utilizes `FaceNet` embeddings and `RetinaFace` detection backend for high-accuracy face verification.
-- ⚡ **Optimized Real-Time Performance**: Pre-computes reference face embeddings at startup, running cosine distance checks every $N$ frames to maximize FPS and CPU/GPU efficiency.
-- 📧 **Automated Gmail Security Alerts**: Sends formatted HTML/Text security notifications via Gmail SMTP upon face recognition.
-- ⏱️ **Smart Cooldown Throttling**: Built-in configurable cooldown interval (e.g. 5 minutes) prevents repetitive alert spamming.
-- 🔒 **Secure Configuration**: Complete isolation of sensitive credentials (API keys, App Passwords) using `.env` environment variables.
-- 📹 **Flexible Video Inputs**: Supports default USB/laptop webcams, IP cameras, RTSP streams, and mobile camera streams (DroidCam).
-
----
-
-## 🏗️ System Architecture | بنية النظام
-
-```
-                +-------------------------+
-                |      Camera Stream      | (Webcam / RTSP / DroidCam)
-                +------------+------------+
-                             |
-                             v
-                +-------------------------+
-                |  Frame Capture (OpenCV) |
-                +------------+------------+
-                             |  (Every N frames)
-                             v
-                +-------------------------+
-                | Face Detection Backend  | (RetinaFace / OpenCV)
-                +------------+------------+
-                             |
-                             v
-                +-------------------------+
-                |  Embedding Extraction   | (FaceNet 128/512-d vector)
-                +------------+------------+
-                             |
-                             v
-                +-------------------------+
-                | Cosine Distance Match   | <--- Reference Embeddings (images/data/)
-                +------------+------------+
-                             |
-                   +---------+---------+
-                   |                   |
-            [Match < Threshold]   [No Match]
-                   |                   |
-                   v                   v
-      +------------------------+  +------------------------+
-      | Display "Match: Name"  |  |   Display "No Match"   |
-      | Check Alert Cooldown   |  +------------------------+
-      +------------+-----------+
-                   | (If cooled down)
-                   v
-      +------------------------+
-      | Send Gmail Security    |
-      | Notification via SMTP  |
-      +------------------------+
-```
+نظام مراقبة ذكي يعتمد على تقنيات الرؤية الحاسوبية والذكاء الاصطناعي للتعرف على الوجوه في الوقت الفعلي وإرسال إشعارات وتنبيهات أمنية فورية على البريد الإلكتروني (Gmail).
 
 ---
 
@@ -84,9 +27,7 @@
 
 ```
 ├── images/
-│   └── data/                 # Place authorized reference photos here (e.g. person1.jpg)
-├── live_face_recognition.py  # 🚀 Main live face recognition & alert script
-├── live_face_detection.py    # 👁️ Standalone live face presence detection script
+│   └── data/                 # Reference images directory
 ├── requirements.txt          # Python dependencies
 ├── .env.example              # Environment variables template
 ├── .gitignore                # Git ignore rules
@@ -107,18 +48,7 @@ git clone https://github.com/omarelsawaf/Face-Recognition-Security-System.git
 cd Face-Recognition-Security-System
 ```
 
-### 3. Create and Activate Virtual Environment | إنشاء البيئة الافتراضية
-```bash
-# On Windows:
-python -m venv venv
-.\venv\Scripts\activate
-
-# On Linux / macOS:
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 4. Install Dependencies | تثبيت المكتبات المطلوبة
+### 3. Install Dependencies | تثبيت المكتبات المطلوبة
 ```bash
 pip install -r requirements.txt
 ```
@@ -127,75 +57,12 @@ pip install -r requirements.txt
 
 ## ⚙️ Configuration (.env) | إعداد ملف التكوين
 
-1. Copy the `.env.example` file to create your local `.env`:
+1. Copy `.env.example` to `.env`:
    ```bash
    cp .env.example .env
    ```
 
-2. Open `.env` and fill in your settings:
-   ```env
-   # Gmail Credentials
-   SENDER_EMAIL=your_email@gmail.com
-   APP_PASSWORD=your_16_character_app_password
-   RECEIVER_EMAIL=recipient_email@gmail.com
-
-   # Target Identity
-   TARGET_NAME=Authorized_User
-
-   # Recognition Settings
-   MODEL_NAME=Facenet
-   DETECTOR_BACKEND=retinaface
-   DISTANCE_THRESHOLD=0.85
-
-   # Performance & Notification Delay
-   CHECK_EVERY_N_FRAMES=10
-   COOLDOWN_SECONDS=300
-
-   # Camera Index (0 for primary webcam, or RTSP/DroidCam stream URL)
-   CAMERA_SOURCE=0
-   ```
-
-> 💡 **How to generate a Gmail App Password:**
-> 1. Go to your [Google Account Security Settings](https://myaccount.google.com/security).
-> 2. Enable **2-Step Verification** (2FA).
-> 3. Search for **App passwords** (كلمات مرور التطبيقات).
-> 4. Create a new App Password named e.g. `FaceRecognition` and copy the 16-character generated code into `APP_PASSWORD`.
-
----
-
-## 🎮 Usage | طريقة التشغيل
-
-### 1. Add Reference Photos | إضافة الصور المرجعية
-Place 1 or more clear, well-lit photos of the authorized person inside the `images/data/` directory (e.g. `images/data/person1.jpg`).
-
-ضع صورة أو أكثر للشخص المراد التعرف عليه داخل مجلد `images/data/` (مثال: `images/data/person1.jpg`).
-
-### 2. Run Face Recognition with Email Alerts
-```bash
-python live_face_recognition.py
-```
-- The script computes facial embeddings for reference images at launch.
-- The live camera window will display a bounding box indicator:
-  - 🟢 **Green ("Match: [Name]")**: Authorized face verified $ightarrow$ Email alert dispatched.
-  - 🔴 **Red ("No Match")**: Face detected but does not match authorized embeddings.
-  - 🟡 **Yellow ("Scanning / No Face")**: Searching for faces.
-- Press **`q`** to safely close the camera stream.
-
-### 3. Run General Face Detection (Without Reference Images)
-If you want an alert whenever **any** face appears on camera:
-```bash
-python live_face_detection.py
-```
-
----
-
-## 📊 Models & Benchmarks
-
-| Model | Detector Backend | Metric | Default Threshold |
-|---|---|---|---|
-| **FaceNet** (Default) | RetinaFace | Cosine Distance | `0.85` |
-| **VGG-Face** | MTCNN / OpenCV | Cosine Distance | `0.68` |
-| **ArcFace** | RetinaFace | Cosine Distance | `0.68` |
+2. Configure your Gmail credentials and camera settings inside `.env`.
 
 ---
 
