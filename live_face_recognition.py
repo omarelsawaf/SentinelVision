@@ -33,7 +33,7 @@ MODEL_NAME = os.getenv("MODEL_NAME", "Facenet")
 DETECTOR_BACKEND = os.getenv("DETECTOR_BACKEND", "retinaface")
 DISTANCE_THRESHOLD = float(os.getenv("DISTANCE_THRESHOLD", "0.85"))
 CAMERA_SOURCE = os.getenv("CAMERA_SOURCE", "0")
-TARGET_NAME = os.getenv("TARGET_NAME", "Omar")
+TARGET_NAME = os.getenv("TARGET_NAME", "Authorized_User")
 
 # Parse camera source (int for device index, string for RTSP/DroidCam URL)
 try:
@@ -50,7 +50,7 @@ COOLDOWN_SECONDS = int(os.getenv("COOLDOWN_SECONDS", "300"))
 last_sent_time = 0
 
 
-def send_gmail_notification(person_name: str = "Authorized User"):
+def send_gmail_notification(person_name: str = "Authorized_User"):
     """Sends an email notification via Gmail with cooldown throttling."""
     global last_sent_time
     current_time = time.time()
@@ -70,14 +70,10 @@ def send_gmail_notification(person_name: str = "Authorized User"):
 
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
         body = (
-            f"تم الكشف عن مطابقة للوجه في نظام المراقبة.
-"
-            f"الاسم: {person_name}
-"
-            f"الوقت: {timestamp}
-"
-            f"الموديل المستخدم: {MODEL_NAME} ({DETECTOR_BACKEND})
-"
+            f"تم الكشف عن مطابقة للوجه في نظام المراقبة.\n"
+            f"الاسم: {person_name}\n"
+            f"الوقت: {timestamp}\n"
+            f"الموديل المستخدم: {MODEL_NAME} ({DETECTOR_BACKEND})\n"
         )
         msg.attach(MIMEText(body, "plain", "utf-8"))
 
@@ -145,8 +141,8 @@ def main():
 
     reference_paths = get_reference_images(REFERENCE_DIR)
     if not reference_paths:
-        print(f"[ERROR] لا توجد صور مرجعية في المجلدات: {REFERENCE_DIR}")
-        print("[HINT] أضف صور الوجه في مجلد images/data/")
+        print(f"[WARN] لا توجد صور مرجعية في المجلدات: {REFERENCE_DIR}")
+        print("[HINT] يرجى وضع صور الوجه المراد التعرف عليه داخل مجلد images/data/ (مثل: person1.jpg).")
         return
 
     print(f"[INFO] تم العثور على {len(reference_paths)} صورة مرجعية.")

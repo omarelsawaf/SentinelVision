@@ -1,6 +1,0 @@
-path: D:\my_face_recognition\locations_dataset
-train: images/train
-val: images/val
-
-names:
-  0: location

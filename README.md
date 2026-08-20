@@ -5,7 +5,6 @@
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
 [![DeepFace](https://img.shields.io/badge/DeepFace-Framework-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://github.com/serengil/deepface)
-[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF?style=for-the-badge&logoColor=black)](https://ultralytics.com)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
 <p align="center">
@@ -32,7 +31,6 @@
 - ⏱️ **Smart Cooldown Throttling**: Built-in configurable cooldown interval (e.g. 5 minutes) prevents repetitive alert spamming.
 - 🔒 **Secure Configuration**: Complete isolation of sensitive credentials (API keys, App Passwords) using `.env` environment variables.
 - 📹 **Flexible Video Inputs**: Supports default USB/laptop webcams, IP cameras, RTSP streams, and mobile camera streams (DroidCam).
-- 🏷️ **YOLOv8 Dataset Ready**: Includes dataset structure and configuration (`dataset.yaml`) for custom object/face localization training with YOLOv8.
 
 ---
 
@@ -86,16 +84,9 @@
 
 ```
 ├── images/
-│   ├── data/                 # Reference images for authorized individuals (e.g. Omar)
-│   └── val/                  # Validation test images
-├── locations_dataset/        # YOLO format dataset for face/location detection
-│   ├── images/
-│   ├── labels/
-│   └── dataset.yaml
+│   └── data/                 # Place authorized reference photos here (e.g. person1.jpg)
 ├── live_face_recognition.py  # 🚀 Main live face recognition & alert script
 ├── live_face_detection.py    # 👁️ Standalone live face presence detection script
-├── my_face_dataset.yaml      # YOLO dataset configuration
-├── yolov8n.pt                # YOLOv8 pre-trained weights
 ├── requirements.txt          # Python dependencies
 ├── .env.example              # Environment variables template
 ├── .gitignore                # Git ignore rules
@@ -149,7 +140,7 @@ pip install -r requirements.txt
    RECEIVER_EMAIL=recipient_email@gmail.com
 
    # Target Identity
-   TARGET_NAME=Omar
+   TARGET_NAME=Authorized_User
 
    # Recognition Settings
    MODEL_NAME=Facenet
@@ -174,8 +165,10 @@ pip install -r requirements.txt
 
 ## 🎮 Usage | طريقة التشغيل
 
-### 1. Add Reference Photos
-Place 1 or more clear, well-lit photos of the target person in the `images/data/` folder (e.g. `images/data/person1.jpg`).
+### 1. Add Reference Photos | إضافة الصور المرجعية
+Place 1 or more clear, well-lit photos of the authorized person inside the `images/data/` directory (e.g. `images/data/person1.jpg`).
+
+ضع صورة أو أكثر للشخص المراد التعرف عليه داخل مجلد `images/data/` (مثال: `images/data/person1.jpg`).
 
 ### 2. Run Face Recognition with Email Alerts
 ```bash
